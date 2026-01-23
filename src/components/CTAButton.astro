@@ -1,0 +1,14 @@
+---
+interface Props {
+  text: string;
+  whatsappNumber: string;
+}
+
+const { text, whatsappNumber } = Astro.props;
+const message = encodeURIComponent("Quiero más información de Flujo TV Premium");
+const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+---
+
+<a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="px-6 py-3 md:py-4 bg-primary text-black font-display font-black hover:bg-yellow-400 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base inline-block border-2 border-black">
+  {text}
+</a>

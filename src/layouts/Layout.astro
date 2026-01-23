@@ -1,0 +1,193 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Flujo TV Colombia | Television TV Premium Full HD',
+  description = 'Flujo TV Colombia: TV en vivo premium y catálogo bajo demanda para Android. Úsalo en celular/tablet y en tu TV con TV Box, Fire Stick, Google TV o Xiaomi Stick. Activación guiada y soporte garantizado. Requiere internet estable.',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, site.canonical).toString();
+const ogImageUrl = new URL('/hero1-colombia.jpg', site.canonical).toString();
+const faviconUrl = new URL('/favicon.svg', site.canonical).toString();
+const logoUrl = new URL('/logo_flujo.png', site.canonical).toString();
+
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+
+const keywords = [
+  'Flujo TV Colombia',
+  'Flujo TV',
+  'Magis TV',
+  'Magis TV planes',
+  'Magis premium',
+  'cómo instalar magis',
+  'cómo instalar magis tv',
+  'como instalar magis tv en android',
+  'alternativa a magis tv',
+  'Flujo TV planes',
+  'Flujo TV planes Colombia',
+  'planes Flujo TV',
+  'precio Flujo TV',
+  'comprar Flujo TV',
+  'activar Flujo TV',
+  'activar Flujo TV por WhatsApp',
+  'validar compatibilidad Flujo TV',
+  'cómo instalar Flujo TV',
+  'cómo instalar Flujo TV en Android',
+  'instalar Flujo TV en TV Box',
+  'televisión en vivo',
+  'tv en vivo',
+  'streaming premium',
+  'películas y series',
+  'catálogo bajo demanda',
+  'entretenimiento digital',
+  'Android',
+  'TV Box',
+  'Fire Stick',
+  'Google TV',
+  'Xiaomi Stick',
+  'Smart TV con TV Box',
+  'soporte por WhatsApp'
+].join(', ');
+
+const pageId = `${canonicalUrl}#webpage`;
+const orgId = `${site.canonical}#organization`;
+const websiteId = `${site.canonical}#website`;
+const serviceId = `${site.canonical}#service`;
+const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: 'Flujo TV Colombia',
+      url: site.canonical,
+      logo: {
+        '@type': 'ImageObject',
+        url: logoUrl
+      },
+      email: site.supportEmail,
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: site.supportEmail,
+          availableLanguage: ['es']
+        }
+      ],
+      sameAs: []
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: site.canonical,
+      name: 'Flujo TV Colombia',
+      publisher: { '@id': orgId },
+      inLanguage: 'es-CO'
+    },
+    {
+      '@type': 'WebPage',
+      '@id': pageId,
+      url: canonicalUrl,
+      name: title,
+      description,
+      isPartOf: { '@id': websiteId },
+      about: { '@id': serviceId },
+      breadcrumb: { '@id': breadcrumbId },
+      inLanguage: 'es-CO',
+      primaryImageOfPage: { '@type': 'ImageObject', url: ogImageUrl }
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Inicio',
+          item: site.canonical
+        }
+      ]
+    },
+    {
+      '@type': 'Service',
+      '@id': serviceId,
+      name: 'Televisión en vivo premium y catálogo bajo demanda',
+      description: 'Servicio premium de televisión en vivo y catálogo bajo demanda, diseñado para Android y dispositivos compatibles.',
+      provider: { '@id': orgId },
+      areaServed: [{ '@type': 'Country', name: 'Colombia' }],
+      offers: site.pricing.plans.map((p) => ({
+        '@type': 'Offer',
+        name: `Plan ${p.name}`,
+        price: p.price,
+        priceCurrency: site.pricing.currencyCode,
+        url: canonicalUrl,
+        availability: 'https://schema.org/InStock'
+      }))
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Flujo TV" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="theme-color" content="#06080c" />
+    <meta name="geo.region" content="CO" />
+    <meta name="geo.placename" content="Colombia" />
+
+    {googleSiteVerification ? (
+      <meta name="google-site-verification" content={googleSiteVerification} />
+    ) : null}
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" href={canonicalUrl} hreflang="es-co" />
+    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Flujo TV Colombia" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="Flujo TV Colombia" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href={faviconUrl} />
+    <meta name="generator" content={Astro.generator} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="bg-[#06080c] text-white antialiased overflow-x-hidden">
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>

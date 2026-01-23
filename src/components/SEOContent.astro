@@ -1,0 +1,77 @@
+---
+import { waLink, site } from '../config/site';
+
+const waCompat = waLink('Hola, quiero validar compatibilidad e instalar Flujo TV Colombia.');
+---
+
+<section id="guia" class="relative py-24 bg-black overflow-x-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20">
+        <span class="text-yellow-400 font-black text-xs tracking-widest uppercase">Guía</span>
+      </div>
+
+      <h2 class="mt-6 text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[0.95]">
+        Cómo instalar y activar
+        <span class="block text-yellow-500">Flujo TV en Colombia</span>
+      </h2>
+
+      <p class="mt-6 text-lg md:text-xl text-white/75 max-w-3xl">
+        Esta guía responde a las búsquedas más comunes: instalación en Android, compatibilidad en TV con TV Box y
+        planes disponibles. Activación guiada por WhatsApp y soporte por correo ({site.supportEmail}).
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <article class="bg-gradient-to-b from-gray-950 to-black border border-white/10 p-6">
+        <h3 class="text-xl font-black text-white">Instalar en Android (celular o tablet)</h3>
+        <p class="mt-3 text-white/75 leading-relaxed">
+          En Android, el proceso es simple: instalas la app, inicias sesión y listo. Si necesitas ayuda, te guiamos paso a paso.
+          Para mejor experiencia, usa una conexión estable.
+        </p>
+      </article>
+
+      <article class="bg-gradient-to-b from-gray-950 to-black border border-white/10 p-6">
+        <h3 class="text-xl font-black text-white">Ver en tu TV con TV Box / Fire Stick</h3>
+        <p class="mt-3 text-white/75 leading-relaxed">
+          Si tu Smart TV no es Android, puedes usar TV Box, Fire Stick, Google TV o Xiaomi Stick.
+          Te ayudamos a validar compatibilidad y a instalar desde el dispositivo.
+        </p>
+      </article>
+
+      <article class="bg-gradient-to-b from-gray-950 to-black border border-white/10 p-6">
+        <h3 class="text-xl font-black text-white">Planes y activación (por WhatsApp)</h3>
+        <p class="mt-3 text-white/75 leading-relaxed">
+          Elige tu plan (1, 3, 6 o 12 meses). La compra se coordina por WhatsApp y confirmamos tu activación.
+          Puedes usar hasta 3 pantallas simultáneas en dispositivos compatibles.
+        </p>
+      </article>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-yellow-500/10 border border-yellow-500/20 p-6">
+        <h3 class="text-xl font-black text-white">¿Buscabas “Magis TV”, “Magis premium” o “Magis TV planes”?</h3>
+        <p class="mt-3 text-white/75 leading-relaxed">
+          Si llegaste por esas búsquedas, aquí encuentras una alternativa orientada a Android y dispositivos compatibles.
+          Lo importante es validar tu equipo y dejar todo configurado correctamente.
+        </p>
+      </div>
+
+      <div class="bg-blue-500/10 border border-blue-500/20 p-6">
+        <h3 class="text-xl font-black text-white">Validar compatibilidad en minutos</h3>
+        <p class="mt-3 text-white/75 leading-relaxed">
+          Envíanos tu modelo de dispositivo y te confirmamos si es compatible.
+          Evita compras innecesarias y activa con acompañamiento.
+        </p>
+        <a
+          href={waCompat}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 bg-yellow-500 text-black font-black hover:bg-yellow-400 transition-colors"
+        >
+          Validar compatibilidad
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

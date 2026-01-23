@@ -1,0 +1,234 @@
+---
+import { site, waLink } from '../config/site';
+
+const slides = [
+  { src: '/hero1-colombia.jpg', alt: 'Flujo TV en Android' },
+  { src: '/hero2-colombia.jpg', alt: 'Streaming premium en HD/4K' },
+  { src: '/hero3-colombia.jpg', alt: 'Televisión en vivo en tus dispositivos' },
+];
+
+const waBuy = waLink('Hola, quiero comprar Flujo TV Colombia.');
+const waInfo = waLink('Hola, quiero validar compatibilidad y activar Flujo TV Colombia.');
+---
+
+<section id="inicio" class="relative min-h-screen bg-black overflow-hidden">
+  <div class="absolute inset-0">
+    <div class="hero-slider" aria-hidden="true">
+      {slides.map((s, i) => (
+        <img
+          class={`hero-slide ${i === 0 ? 'is-active' : ''}`}
+          src={s.src}
+          alt={s.alt}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+      ))}
+    </div>
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black"></div>
+
+    <div class="absolute w-full h-full bg-gradient-to-br from-yellow-600/10 via-blue-900/20 to-red-800/10"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-yellow-500/5 to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 min-h-screen grid grid-cols-12 gap-y-10 lg:gap-y-0">
+    <div class="col-span-12 lg:col-span-7 flex items-center px-6 md:px-12 lg:px-16 py-28">
+      <div class="max-w-3xl">
+        <div class="mb-8 inline-flex items-center gap-3 px-5 py-2 bg-yellow-500/10 backdrop-blur border-l-4 border-yellow-500">
+          <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+          <span class="text-yellow-400 font-bold text-xs md:text-sm tracking-widest uppercase">
+            Magis ahora es Flujo
+          </span>
+        </div>
+
+        <h1 class="mb-8 leading-none">
+          <div class="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-2">
+            FLUJO TV
+          </div>
+          <div class="text-4xl md:text-5xl lg:text-6xl font-black text-yellow-500 mb-4">
+            COLOMBIA
+          </div>
+          <div class="text-xl md:text-2xl lg:text-3xl font-light text-white/80">
+            Tu TV contigo: <span class="font-black text-yellow-400">celular, tablet o TV Box</span>
+          </div>
+        </h1>
+
+        <div class="mb-10 space-y-3 text-lg md:text-xl text-white/90">
+          <p class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-yellow-500 rotate-45"></span>
+            Television en vivo premium y catálogo bajo demanda
+          </p>
+          <p class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-blue-400 rotate-45"></span>
+            Calidad disponible en HD/4K según contenido, dispositivo y conexión
+          </p>
+          <p class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-red-400 rotate-45"></span>
+            Hasta 3 pantallas simultáneas en dispositivos compatibles
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-10">
+          <a
+            href={waBuy}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-between w-full md:w-auto px-10 py-5 bg-yellow-500 text-black font-black text-lg hover:bg-yellow-400 transition-all duration-300"
+          >
+            <span>ACTIVAR POR WHATSAPP</span>
+            <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4l1.41 1.41L8.83 10H20v2H8.83l4.58 4.59L12 18l-8-8 8-8z" />
+            </svg>
+          </a>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="#planes"
+              class="group flex items-center justify-center w-full md:w-auto px-10 py-5 border-2 border-white/20 text-white font-bold hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300"
+            >
+              VER PLANES (USD)
+            </a>
+            <a
+              href={waInfo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center justify-center w-full md:w-auto px-10 py-5 border-2 border-white/10 text-white/90 font-semibold hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"
+            >
+              VALIDAR COMPATIBILIDAD
+            </a>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 text-white/60 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+            <span>Requiere internet estable</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+            <span>Soporte: {site.supportEmail}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+            <span>Smart TV sin Android: requiere TV Box</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-5 relative">
+      <div class="relative lg:absolute lg:inset-0 p-6 md:p-12 flex items-start lg:items-center">
+        <div class="w-full space-y-4">
+          <div class="bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 backdrop-blur border border-yellow-500/30 p-6 md:transform md:-translate-x-8 md:hover:translate-x-0 transition-transform duration-300">
+            <div class="text-yellow-400 font-black text-4xl mb-2">Android</div>
+            <div class="text-white text-sm">Celular y tablet</div>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur border border-blue-500/30 p-6 hover:scale-105 transition-transform duration-300">
+            <div class="text-blue-400 font-black text-4xl mb-2">TV Box</div>
+            <div class="text-white text-sm">Para ver en tu TV</div>
+          </div>
+
+          <div class="bg-gradient-to-br from-red-500/20 to-red-600/10 backdrop-blur border border-red-500/30 p-6 md:transform md:translate-x-8 md:hover:translate-x-0 transition-transform duration-300">
+            <div class="text-red-400 font-black text-4xl mb-2">3</div>
+            <div class="text-white text-sm">Pantallas simultáneas</div>
+          </div>
+
+          <div class="bg-yellow-500 p-8 transform hover:scale-105 transition-transform duration-300">
+            <div class="text-black font-black text-xl mb-2">Desde</div>
+            <div class="text-black font-black text-6xl">$9</div>
+            <div class="text-black font-bold">USD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const root = document.getElementById('inicio');
+      if (!root) return;
+      if (root.dataset.sliderInit === '1') return;
+      root.dataset.sliderInit = '1';
+
+      const slideEls = Array.from(root.querySelectorAll('.hero-slide'));
+      if (slideEls.length < 2) return;
+
+      const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+      if (prefersReducedMotion) return;
+
+      let index = 0;
+      const intervalMs = 3000;
+
+      const setActive = (next) => {
+        slideEls[index]?.classList.remove('is-active');
+        slideEls[next]?.classList.add('is-active');
+        index = next;
+      };
+
+      let timer = window.setInterval(() => setActive((index + 1) % slideEls.length), intervalMs);
+
+      const pause = () => {
+        if (timer) window.clearInterval(timer);
+        timer = 0;
+      };
+      const resume = () => {
+        if (!timer) timer = window.setInterval(() => setActive((index + 1) % slideEls.length), intervalMs);
+      };
+
+      root.addEventListener('mouseenter', pause);
+      root.addEventListener('mouseleave', resume);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pause();
+        else resume();
+      });
+    })();
+  </script>
+</section>
+
+<style>
+  .hero-slider {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(2px) saturate(1.05);
+    transition:
+      opacity 800ms ease,
+      transform 2200ms ease;
+    will-change: opacity, transform;
+  }
+
+  @media (max-width: 640px) {
+    .hero-slide {
+      object-position: 50% 35%;
+      filter: blur(1px) saturate(1.05);
+      transform: scale(1.1);
+    }
+
+    .hero-slide.is-active {
+      transform: scale(1.06);
+    }
+  }
+
+  .hero-slide.is-active {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide {
+      transition: none;
+    }
+  }
+</style>
