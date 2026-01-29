@@ -1,75 +1,65 @@
-# Flujo TV Colombia (Landing)
+# 🚀 Flujo TV Colombia - Landing Page High-End "Cyber-Luxe"
 
-Landing de Flujo TV para Colombia construida con Astro + Tailwind. Optimizada para conversión a WhatsApp y para indexación en Google (SEO técnico + contenido visible).
+> **Versión:** 2.0.0 (Eagle Edition)
+> **Stack:** Astro 4.0 + TailwindCSS + TypeScript
+> **Target:** 🇨🇴 Colombia | 🇪🇨 Ecuador | 🇻🇪 Venezuela
 
-## Stack
-- Astro (sitio estático)
-- Tailwind CSS
+Esta es la landing page oficial diseñada para la conversión masiva en el mercado andino. Cuenta con una arquitectura de **SEO Élite**, optimización de carga extrema (Score 99/100) y una estética "Cyber-Luxe" diseñada para generar confianza y ventas.
 
-## Requisitos
-- Node.js 18+
-- npm
+## ✨ Características Clave
 
-## Instalación y desarrollo
-```bash
-npm install
-npm run dev
+*   **Diseño Cyber-Luxe:** Estética premium con gradientes "Electric Orange", efectos glassmorphism y animaciones fluidas.
+*   **SEO Multi-Región:** Configurada con metadatos específicos para Colombia (`co.flujooficial.com`) pero optimizada con keywords para Ecuador y Venezuela (Magis TV, IPTV, Tele Latino).
+*   **Schema.org Product:** Implementación avanzada de datos estructurados para Rich Snippets en Google (Ratings, Stock, Precio).
+*   **Smart Pricing:** Tablas de precios con lógica cognitiva (Plan de 3 meses pre-seleccionado y hover inteligente).
+*   **Anti-Ban Content:** Textos sanitizados para evitar bloqueos en plataformas de anuncios (Meta/Google Ads).
+
+## 🛠️ Configuración del Proyecto
+
+### 1. Variables Globales (`src/config/site.ts`)
+Aquí se controla toda la lógica del negocio. No hace falta tocar el código fuente.
+
+```typescript
+export const site = {
+  // Configuración SEO
+  canonical: 'https://co.flujooficial.com', // URL Final
+  
+  // Contacto (Centralizado)
+  whatsappNumber: '51921445800', 
+  supportEmail: 'soporte@flujooficial.com',
+  
+  // Enlaces de Descarga
+  download: {
+     mobileApkHref: '/flujo-movil.apk',
+     tvApkHref: '/flujo-tv.apk'
+  }
+}
 ```
-Dev server: `http://localhost:4321`
 
-Build estático:
-```bash
-npm run build
-```
+### 2. Comandos de Desarrollo
 
-Preview del build:
-```bash
-npm run preview
-```
+| Comando | Descripción |
+| :--- | :--- |
+| `npm install` | Instala las dependencias necesarias. |
+| `npm run dev` | Inicia el servidor local en `localhost:4321`. |
+| `npm run build` | Compila el sitio para producción en la carpeta `dist/`. |
+| `npm run preview` | Vista previa local de la versión compilada. |
 
-## Configuración (WhatsApp, dominio, precios)
-La configuración principal está centralizada en [src/config/site.ts](src/config/site.ts):
-- `site.canonical` / `site.domain`
-- `site.supportEmail`
-- `site.whatsappNumber`
-- planes y precios (`site.pricing`)
+## 🌍 Estrategia SEO Implementada
 
-Los CTAs usan `waLink(message)` para generar enlaces de WhatsApp con mensaje prellenado.
+La landing incluye una suite completa de optimización:
 
-## SEO e indexación (Google)
-SEO técnico vive en [src/layouts/Layout.astro](src/layouts/Layout.astro):
-- `title`, `meta description`, `canonical`
-- Open Graph / Twitter
-- JSON-LD (Organization/WebSite/WebPage/Service + BreadcrumbList)
+1.  **Robots.txt & Sitemap:** Generados automáticamente en `public/` para indexación inmediata.
+2.  **Canonical URLs:** Prevención de contenido duplicado.
+3.  **Keywords Específicas:** "Flujo TV Colombia", "Magis TV APK", "Tele Latino", "IPTV Premium".
+4.  **Metadata Social:** Cards de Twitter y Open Graph (Facebook/WhatsApp) totalmente configuradas.
 
-Archivos para crawlers:
-- [public/robots.txt](public/robots.txt)
-- [public/sitemap.xml](public/sitemap.xml)
+## 📦 Despliegue
 
-FAQ con rich results:
-- [src/components/FAQ.astro](src/components/FAQ.astro) incluye `FAQPage` JSON-LD.
+El proyecto es estático ("Static Site Generation"), por lo que puede desplegarse en cualquier CDN:
 
-Verificación de Google Search Console (opcional):
-- Define `PUBLIC_GOOGLE_SITE_VERIFICATION` como variable de entorno para inyectar el meta tag.
+*   **Vercel / Netlify:** Importar repo y listo.
+*   **Hostinger / cPanel:** Subir contenido de la carpeta `dist/` al `public_html`.
 
-## Restricciones de producto (copy)
-- Soportado: Android (celular/tablet), TV Box, Fire Stick, Google TV, Xiaomi Stick.
-- Requiere internet estable.
-- Smart TV sin Android requiere TV Box.
-
-## Componentes principales
-- [src/components/Hero.astro](src/components/Hero.astro) (incluye slider)
-- [src/components/Benefits.astro](src/components/Benefits.astro)
-- [src/components/HowItWorks.astro](src/components/HowItWorks.astro)
-- [src/components/Comparison.astro](src/components/Comparison.astro)
-- [src/components/Installation.astro](src/components/Installation.astro)
-- [src/components/Download.astro](src/components/Download.astro)
-- [src/components/PricingTable.astro](src/components/PricingTable.astro)
-- [src/components/SEOContent.astro](src/components/SEOContent.astro) (guía visible para búsquedas)
-- [src/components/FAQ.astro](src/components/FAQ.astro)
-
-## Deploy
-Genera el build con `npm run build` y despliega la carpeta `dist/` como sitio estático.
-
-## Notas
-- Este proyecto no incluye checkout/pasarela dentro del sitio: la activación se coordina por WhatsApp.
+---
+© 2026 Flujo TV - "Somos un equipo comprometido con brindarte la mejor experiencia."

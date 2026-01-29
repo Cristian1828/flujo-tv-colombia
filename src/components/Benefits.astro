@@ -1,146 +1,87 @@
 ---
-const benefitIcons: Record<string, string> = {
-  film: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l2-3h14l-2 3"/><path d="M20 7H4"/><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M8 7l1.5-3"/><path d="M12 7l1.5-3"/><path d="M16 7l1.5-3"/></svg>`,
-  bolt: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 12-14h-7l1-6z"/></svg>`,
-  devices: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="13" height="10" rx="2"/><path d="M6 21h5"/><path d="M8.5 17v4"/><rect x="17" y="5" width="5" height="14" rx="1.5"/><path d="M19.5 16h.01"/></svg>`,
-  receipt: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-2-1-2 1-2-1-2 1-2-1-2 1V2z"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h4"/></svg>`,
-  puzzle: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6l1 3h2a2 2 0 0 1 2 2v1"/><path d="M21 10v8a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2"/><path d="M7 14H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8"/><path d="M16 6l-1-3"/><path d="M12 20v-3"/><path d="M10 17h4"/></svg>`,
-  support: `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M4 12v3a2 2 0 0 0 2 2h1"/><path d="M20 12v3a2 2 0 0 1-2 2h-1"/><rect x="3" y="12" width="4" height="6" rx="2"/><rect x="17" y="12" width="4" height="6" rx="2"/><path d="M8 20h8"/></svg>`,
-};
-
 const benefits = [
   {
-    icon: "film",
-    title: "Catálogo y en vivo",
-    desc: "Accede a televisión en vivo premium y contenido bajo demanda desde una sola plataforma.",
-    color: "yellow"
+    title: 'Pasión Deportiva',
+    subtitle: 'Sin Interrupciones',
+    desc: 'Vive la adrenalina de tus eventos favoritos en tiempo real. Fútbol, Motores y más.',
+    image: '/benefit-sports.png',
+    color: 'from-emerald-500 to-teal-500'
   },
   {
-    icon: "bolt",
-    title: "Rendimiento estable",
-    desc: "Calidad pensada para uso diario. Recomendado con internet estable para mejor experiencia.",
-    color: "blue"
+    title: 'Cine & Series 4K',
+    subtitle: 'Catálogo Actualizado',
+    desc: 'Estrenos recientes y series completas de todas las plataformas líderes en una sola app.',
+    image: '/benefit-cinema.png',
+    color: 'from-purple-500 to-pink-500'
   },
   {
-    icon: "devices",
-    title: "Tu TV viaja contigo",
-    desc: "Úsalo en Android (móvil/tablet) y en TV con TV Box / Google TV / Fire Stick. Hasta 3 pantallas simultáneas.",
-    color: "red"
-  },
-  {
-    icon: "receipt",
-    title: "Planes claros",
-    desc: "Precios en USD con opciones por tiempo. Elige 1, 3, 6 o 12 meses según tu necesidad.",
-    color: "yellow"
-  },
-  {
-    icon: "puzzle",
-    title: "Compatibilidad",
-    desc: "Android, TV Box y dispositivos compatibles. En Smart TV sin Android se requiere TV Box.",
-    color: "blue"
-  },
-  {
-    icon: "support",
-    title: "Soporte garantizado",
-    desc: "Te acompañamos en instalación, compatibilidad y activación para que empieces sin fricción.",
-    color: "red"
+    title: 'Velocidad Turbo',
+    subtitle: 'Cero Buffering',
+    desc: 'Infraestructura propia optimizada para Latinoamérica. Dale play y olvídate de cargar.',
+    image: '/benefit-server.png',
+    color: 'from-blue-500 to-cyan-500'
   }
 ];
 ---
 
-<section id="beneficios" class="relative py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-x-hidden">
-  <!-- Background decorativo -->
-  <div class="absolute inset-0 opacity-20">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-yellow-500 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
-  </div>
-
+<section id="beneficios" class="relative py-24 bg-[#050B14]">
+  
   <div class="relative z-10 max-w-7xl mx-auto px-6">
-    <!-- Header -->
-    <div class="mb-20 text-center">
-      <div class="inline-block mb-4 px-6 py-2 bg-yellow-500/10 border-l-4 border-yellow-500">
-        <span class="text-yellow-400 font-black text-sm tracking-widest uppercase">¿Por qué Flujo TV?</span>
+    <!-- Updated container with overflow handling -->
+    <div class="flex flex-col items-center text-center mb-16 w-full overflow-hidden px-4 md:overflow-visible">
+      
+      <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+         <span class="text-[10px] font-bold text-white/60 uppercase tracking-widest">Características</span>
       </div>
-      <h2 class="text-5xl sm:text-6xl md:text-7xl font-black text-white mb-6 leading-[0.95]">
-        LO QUE <span class="text-yellow-500">NECESITAS</span>
+      
+      <!-- Title stacked below with LARGE padding for italics -->
+      <h2 class="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase pb-4 pr-20 inline-block custom-italic-title">
+        Experiencia <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 py-2 inline-block">Premium</span>
       </h2>
-      <p class="text-2xl text-white/70 max-w-2xl mx-auto">
-        Beneficios reales para usarlo en casa o de viaje.
+      
+      <p class="text-white/40 mt-2 max-w-2xl mx-auto text-lg leading-relaxed">
+        Calidad Ultra HD y estabilidad garantizada.
       </p>
     </div>
 
-    <!-- Grid Diagonal - 3x2 con offset -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {benefits.map((benefit, index) => {
-        const colorClasses = {
-          yellow: 'border-yellow-500/30 hover:border-yellow-500 bg-gradient-to-br from-yellow-500/5 to-transparent',
-          blue: 'border-blue-500/30 hover:border-blue-500 bg-gradient-to-br from-blue-500/5 to-transparent',
-          red: 'border-red-500/30 hover:border-red-500 bg-gradient-to-br from-red-500/5 to-transparent'
-        };
-        
-        const iconColors = {
-          yellow: 'text-yellow-400',
-          blue: 'text-blue-400',
-          red: 'text-red-400'
-        };
-
-        // Offset escalonado
-        const offsetClass = index % 3 === 0 ? 'md:translate-y-0' : index % 3 === 1 ? 'md:translate-y-8' : 'md:translate-y-16';
-
-        return (
-          <div 
-            class={`group relative p-8 border-2 ${colorClasses[benefit.color]} backdrop-blur transition-all duration-500 hover:scale-105 hover:shadow-2xl ${offsetClass}`}
-            style={`animation-delay: ${index * 0.1}s;`}
-          >
-            {/* Icon */}
-            <div class={`mb-6 ${iconColors[benefit.color]} group-hover:scale-125 transition-transform duration-300`}>
-              <span class="inline-flex" set:html={benefitIcons[benefit.icon]} />
-            </div>
-
-            {/* Content */}
-            <h3 class="text-2xl font-black text-white mb-4">
-              {benefit.title}
-            </h3>
-            <p class="text-white/70 leading-relaxed">
-              {benefit.desc}
-            </p>
-
-            {/* Decorative corner */}
-            <div class={`absolute top-0 right-0 w-16 h-16 ${benefit.color === 'yellow' ? 'bg-yellow-500/10' : benefit.color === 'blue' ? 'bg-blue-500/10' : 'bg-red-500/10'} transform translate-x-8 -translate-y-8 rotate-45 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {benefits.map((item) => (
+        <div class="group relative h-[450px] rounded-2xl overflow-hidden cursor-default border border-white/10 hover:border-white/30 transition-all duration-500">
+          
+          <div class="absolute inset-0 bg-gray-900">
+            <img 
+              src={item.image} 
+              alt={item.title} 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
+              loading="eager"
+            />
           </div>
-        );
-      })}
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-[#02050b] via-[#02050b]/80 to-transparent"></div>
+          
+          <div class={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}></div>
+
+          <div class="absolute inset-0 flex flex-col justify-end p-8">
+            <h3 class="text-2xl font-black text-white uppercase italic tracking-wide mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">{item.title}</h3>
+            <div class={`text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r ${item.color} mb-4 uppercase tracking-widest translate-y-2 group-hover:translate-y-0 transition-transform duration-500 delay-75`}>
+              {item.subtitle}
+            </div>
+            <p class="text-white/70 text-sm leading-relaxed translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+              {item.desc}
+            </p>
+          </div>
+
+        </div>
+      ))}
     </div>
 
-    <!-- Bottom CTA -->
-    <div class="mt-20 text-center">
-      <a 
-        href="#planes"
-        class="inline-flex items-center gap-3 px-12 py-6 bg-yellow-500 text-black font-black text-xl hover:bg-yellow-400 transition-all duration-300"
-      >
-        <span>VER PLANES</span>
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </a>
-    </div>
   </div>
 </section>
 
 <style>
-  [class*="translate-y-"] {
-    animation: slideUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(var(--tw-translate-y));
-    }
+  /* Ensure no clipping on small screens even with overflow hidden on parent */
+  .custom-italic-title {
+    line-height: 1.1;
+    margin-right: -20px; /* Compensate visually for the padding */
   }
 </style>

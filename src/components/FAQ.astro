@@ -1,200 +1,74 @@
 ---
-import { site, waLink } from '../config/site';
-
-const waFaq = waLink('Hola, tengo una pregunta sobre Flujo TV Colombia.');
-
 const faqs = [
   {
-    question: "¿Buscabas Magis TV o Magis premium?",
-    answer:
-      "Si llegaste buscando Magis TV, aquí encuentras una alternativa: Flujo TV. Te ayudamos a validar compatibilidad e instalar en Android (celular/tablet) y en TV usando TV Box / Fire Stick / Google TV / Xiaomi Stick."
+    q: '¿Qué es exactamente Flujo TV?',
+    a: 'Somos la evolución del entretenimiento. Accede a canales exclusivos, películas de estreno y series de todas las plataformas más populares en una sola App rápida y estable.'
   },
   {
-    question: "Magis TV planes: ¿qué planes tienen?",
-    answer:
-      "Nuestros planes son desde $9 USD y puedes elegir 1, 3, 6 o 12 meses. La compra se coordina por WhatsApp y te guiamos con la activación y el uso en hasta 3 pantallas simultáneas (según dispositivos compatibles)."
+    q: '¿Funciona en mi celular y TV al mismo tiempo?',
+    a: 'Sí. Tu cuenta permite hasta 3 pantallas simultáneas. Puedes ver fútbol en tu celular mientras en casa ven una película en el Smart TV.'
   },
   {
-    question: "¿Cómo instalar Magis TV? (Instalación en Android)",
-    answer:
-      "Si tu búsqueda era “cómo instalar Magis TV”, te guiamos con el proceso de instalación para Flujo TV: en Android normalmente se instala la app y se inicia sesión; en TV se instala desde tu TV Box/Google TV/Fire Stick/Xiaomi Stick."
+    q: '¿Necesito internet muy rápido?',
+    a: 'Con 20 megas estables es suficiente. Nuestros servidores optimizados se encargan de mantener la señal fluida en alta definición.'
   },
   {
-    question: "¿Funciona en cualquier dispositivo?",
-    answer:
-      "Funciona en Android (celular/tablet) y en TV con TV Box / Fire Stick / Google TV / Xiaomi Stick. En Smart TV sin Android se requiere TV Box."
+    q: '¿Funciona en TV Samsung o LG?',
+    a: 'Estas marcas tienen sistemas cerrados. La solución es conectar un TV Box o Fire Stick (son económicos) y tu TV será compatible con nuestra App oficial.'
   },
   {
-    question: "¿Necesito instalar algo complicado?",
-    answer:
-      "Te guiamos paso a paso. En Android normalmente se instala la app y se inicia sesión; en TV Box/Google TV se instala desde el dispositivo."
+    q: '¿El pago es seguro?',
+    a: 'Totalmente. Somos distribuidores autorizados. Tu activación se gestiona directamente vía WhatsApp con soporte humano real.'
   },
   {
-    question: "¿Qué calidad de imagen tiene?",
-    answer:
-      "Disponible en HD/4K según el contenido, tu dispositivo y tu conexión. Para mejor experiencia, recomendamos internet estable y buen Wi‑Fi/ethernet en TV Box."
-  },
-  {
-    question: "¿Puedo compartir mi cuenta?",
-    answer:
-      "Puedes usar hasta 3 pantallas simultáneas. Ideal para uso personal o familiar sin complicaciones."
-  },
-  {
-    question: "¿Qué incluye el acceso?",
-    answer:
-      "Incluye television en vivo premium y un catálogo bajo demanda. La disponibilidad puede variar y el contenido se optimiza para uso estable en Android y dispositivos compatibles."
-  },
-  {
-    question: "¿Cómo es el tema de pago?",
-    answer:
-      "La compra se coordina por WhatsApp. Te indicamos los métodos disponibles y confirmamos tu activación.",
-  },
-  {
-    question: "¿Ofrecen garantía o devoluciones?",
-    answer:
-      "No ofrecemos devoluciones. Lo que sí garantizamos es activación asegurada y soporte para instalación y uso."
-  },
-  {
-    question: "¿El soporte es 24/7?",
-    answer:
-      `Brindamos soporte por correo (${site.supportEmail}) y por WhatsApp para guiarte con instalación, compatibilidad y acceso.`
+    q: '¿Tiempo de activación?',
+    a: 'Casi inmediato. En menos de 10 minutos tras confirmar tu pedido, recibes tu usuario y contraseña listo para usar.'
   }
 ];
-
-const faqStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer
-    }
-  }))
-};
 ---
 
-<section id="preguntas" class="relative py-32 bg-gradient-to-b from-black via-gray-950 to-black overflow-x-hidden">
-  <script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
-  <!-- Animated dots pattern -->
-  <div class="absolute inset-0 opacity-5">
-    <div class="absolute inset-0" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
-  </div>
-
-  <div class="relative z-10 max-w-5xl mx-auto px-6">
-    <!-- Header -->
-    <div class="text-center mb-20">
-      <div class="inline-block mb-6 px-8 py-3 bg-gradient-to-r from-yellow-500 to-blue-500">
-        <span class="font-black text-black text-sm tracking-widest">RESPUESTAS</span>
-      </div>
-      
-      <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-white mb-6 leading-[0.95] pb-1">
-        PREGUNTAS
-        <span class="block text-yellow-500">
-          FRECUENTES
-        </span>
+<section id="preguntas" class="relative py-24 bg-[#050B14]">
+  <div class="max-w-4xl mx-auto px-6">
+    
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase mb-4 pr-2">
+        Preguntas <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Frecuentes</span>
       </h2>
-      
-      <p class="text-xl md:text-2xl text-white/70">
-        Las dudas que todos tienen. <span class="text-yellow-500 font-bold">Resueltas rápido.</span>
+      <p class="text-white/40 text-sm max-w-lg mx-auto">
+        Resolvemos tus dudas con claridad y honestidad.
       </p>
     </div>
 
-    <!-- FAQ accordion con diseño único -->
     <div class="space-y-4">
-      {faqs.map((faq, index) => (
-        <details 
-          class="group bg-gray-900 border-l-4 border-transparent hover:border-yellow-500 transition-all duration-300"
-          style={`animation-delay: ${index * 0.1}s;`}
-        >
-          <summary class="cursor-pointer list-none p-8 select-none">
-            <div class="flex items-start justify-between gap-6">
-              <div class="flex items-start gap-4 flex-1">
-                {/* Number badge */}
-                <div class="flex-shrink-0 w-12 h-12 bg-yellow-500/10 border-2 border-yellow-500/30 flex items-center justify-center group-open:bg-yellow-500 group-open:border-yellow-500 transition-all duration-300">
-                  <span class="font-black text-yellow-500 group-open:text-black">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                
-                {/* Question */}
-                <h3 class="text-xl md:text-2xl font-black text-white group-hover:text-yellow-500 transition-colors duration-300 flex-1">
-                  {faq.question}
-                </h3>
-              </div>
-
-              {/* Icon */}
-              <div class="flex-shrink-0 w-8 h-8 text-yellow-500">
-                <svg 
-                  class="w-full h-full transform group-open:rotate-45 transition-transform duration-500" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
-                </svg>
-              </div>
+      {faqs.map((item, i) => (
+        <details class="group bg-[#0A101C] border border-white/5 rounded-xl overflow-hidden transition-all duration-300 open:border-blue-500/30 open:bg-blue-900/5 hover:border-white/20">
+          <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+            <div class="flex items-center gap-4">
+              <span class="text-blue-500/50 font-black text-xs font-mono">Q{i+1}</span>
+              <span class="font-bold text-white text-lg group-hover:text-blue-300 transition-colors">{item.q}</span>
+            </div>
+            <div class="relative w-6 h-6 flex items-center justify-center">
+              <div class="absolute w-full h-[2px] bg-white/30 group-hover:bg-blue-400 transition-colors"></div>
+              <div class="absolute w-[2px] h-full bg-white/30 group-hover:bg-blue-400 transition-colors rotate-90 group-open:rotate-0 transition-transform duration-300"></div>
             </div>
           </summary>
-
-          {/* Answer */}
-          <div class="px-8 pb-8 pl-24">
-            <div class="border-l-2 border-yellow-500/30 pl-6">
-              <p class="text-lg text-white/80 leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
+          
+          <div class="px-6 pb-6 pt-0 text-white/70 leading-relaxed border-t border-white/5 mt-2 animate-fade-in pl-14 text-sm">
+            {item.a}
           </div>
         </details>
       ))}
     </div>
 
-    <!-- CTA final -->
-    <div class="mt-20 text-center">
-      <div class="bg-gradient-to-r from-yellow-500/10 via-blue-500/10 to-red-500/10 border-2 border-yellow-500/30 p-12">
-        <h3 class="text-3xl md:text-4xl font-black text-white mb-4">
-          ¿Tienes otra pregunta?
-        </h3>
-        <p class="text-white/70 text-lg mb-8">
-          Escríbenos por WhatsApp. Te respondemos al toque.
-        </p>
-        <a 
-          href={waFaq}
-          target="_blank"
-          class="inline-flex items-center gap-3 px-10 py-5 bg-yellow-500 text-black font-black text-lg hover:bg-yellow-400 transition-all duration-300 hover:scale-105"
-        >
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          <span>ESCRÍBENOS AHORA</span>
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
-  [style*="animation-delay"] {
-    animation: slideInLeft 0.6s ease-out backwards;
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-  }
-
-  /* Smooth opening animation */
-  details[open] > div {
-    animation: slideDown 0.5s ease-out;
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
   }
 </style>

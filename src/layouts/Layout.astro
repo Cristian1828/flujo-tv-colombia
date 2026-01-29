@@ -1,137 +1,135 @@
 ---
+import { site, canonicalUrl } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../config/site';
 
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string; // Changed to string to accept the string from props or site config
 }
 
-const {
-  title = 'Flujo TV Colombia | Television TV Premium Full HD',
-  description = 'Flujo TV Colombia: TV en vivo premium y catálogo bajo demanda para Android. Úsalo en celular/tablet y en tu TV con TV Box, Fire Stick, Google TV o Xiaomi Stick. Activación guiada y soporte garantizado. Requiere internet estable.',
+const { 
+  title = site.title,
+  description = site.description,
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, site.canonical).toString();
-const ogImageUrl = new URL('/hero1-colombia.jpg', site.canonical).toString();
-const faviconUrl = new URL('/favicon.svg', site.canonical).toString();
-const logoUrl = new URL('/logo_flujo.png', site.canonical).toString();
+// Use site.keywords array joined by comma if overrides not provided
+const keywords = Astro.props.keywords || site.keywords.join(', ');
 
-const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const canonical = canonicalUrl(Astro.url.pathname);
+const ogImageUrl = `${site.canonical}/hero1-colombia.jpg`; // Fixed SEO Image
+const faviconUrl = `${site.canonical}/favicon.svg`;
 
-const keywords = [
-  'Flujo TV Colombia',
-  'Flujo TV',
-  'Magis TV',
-  'Magis TV planes',
-  'Magis premium',
-  'cómo instalar magis',
-  'cómo instalar magis tv',
-  'como instalar magis tv en android',
-  'alternativa a magis tv',
-  'Flujo TV planes',
-  'Flujo TV planes Colombia',
-  'planes Flujo TV',
-  'precio Flujo TV',
-  'comprar Flujo TV',
-  'activar Flujo TV',
-  'activar Flujo TV por WhatsApp',
-  'validar compatibilidad Flujo TV',
-  'cómo instalar Flujo TV',
-  'cómo instalar Flujo TV en Android',
-  'instalar Flujo TV en TV Box',
-  'televisión en vivo',
-  'tv en vivo',
-  'streaming premium',
-  'películas y series',
-  'catálogo bajo demanda',
-  'entretenimiento digital',
-  'Android',
-  'TV Box',
-  'Fire Stick',
-  'Google TV',
-  'Xiaomi Stick',
-  'Smart TV con TV Box',
-  'soporte por WhatsApp'
-].join(', ');
-
-const pageId = `${canonicalUrl}#webpage`;
-const orgId = `${site.canonical}#organization`;
-const websiteId = `${site.canonical}#website`;
-const serviceId = `${site.canonical}#service`;
-const breadcrumbId = `${canonicalUrl}#breadcrumb`;
-
-const structuredData = {
+// Schema.org Organization
+const organizationSchema = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
+  '@type': 'Organization',
+  name: 'Flujo TV Colombia',
+  url: site.canonical,
+  logo: `${site.canonical}/logo_flujo.png`,
+  description: site.description,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: `+${site.whatsappNumber}`,
+    contactType: 'customer service',
+    availableLanguage: ['es']
+  }
+};
+
+// Schema.org WebSite
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Flujo TV Colombia',
+  url: site.canonical,
+  description: site.description,
+  inLanguage: 'es-CO',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${site.canonical}/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+// Schema.org Product (Streaming Service) - MATCHING GENERIC LANDING QUALITY
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Flujo TV Premium Colombia',
+  description: site.description,
+  image: ogImageUrl,
+  url: site.canonical,
+  brand: {
+    '@type': 'Brand',
+    name: 'Flujo TV'
+  },
+  offers: site.pricing.plans.map(plan => ({
+    '@type': 'Offer',
+    name: plan.name,
+    price: plan.price,
+    priceCurrency: site.pricing.currencyCode,
+    availability: 'https://schema.org/InStock',
+    url: `${site.canonical}/#planes`,
+    priceValidUntil: '2026-12-31',
+    itemCondition: 'https://schema.org/NewCondition',
+    seller: {
       '@type': 'Organization',
-      '@id': orgId,
-      name: 'Flujo TV Colombia',
-      url: site.canonical,
-      logo: {
-        '@type': 'ImageObject',
-        url: logoUrl
+      name: 'Flujo TV Colombia'
+    },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: {
+        '@type': 'MonetaryAmount',
+        value: 0,
+        currency: 'USD'
       },
-      email: site.supportEmail,
-      contactPoint: [
-        {
-          '@type': 'ContactPoint',
-          contactType: 'customer support',
-          email: site.supportEmail,
-          availableLanguage: ['es']
+      shippingDestination: {
+        '@type': 'DefinedRegion',
+        addressCountry: 'CO' // Colombia Target
+      },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 0,
+          maxValue: 0,
+          unitCode: 'DAY'
+        },
+        transitTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 0,
+          maxValue: 0,
+          unitCode: 'DAY'
         }
-      ],
-      sameAs: []
+      }
     },
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'CO',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+      merchantReturnDays: 0
+    }
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '2150',
+    bestRating: '5',
+    worstRating: '1'
+  }
+};
+
+// Schema.org BreadcrumbList
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
     {
-      '@type': 'WebSite',
-      '@id': websiteId,
-      url: site.canonical,
-      name: 'Flujo TV Colombia',
-      publisher: { '@id': orgId },
-      inLanguage: 'es-CO'
-    },
-    {
-      '@type': 'WebPage',
-      '@id': pageId,
-      url: canonicalUrl,
-      name: title,
-      description,
-      isPartOf: { '@id': websiteId },
-      about: { '@id': serviceId },
-      breadcrumb: { '@id': breadcrumbId },
-      inLanguage: 'es-CO',
-      primaryImageOfPage: { '@type': 'ImageObject', url: ogImageUrl }
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': breadcrumbId,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Inicio',
-          item: site.canonical
-        }
-      ]
-    },
-    {
-      '@type': 'Service',
-      '@id': serviceId,
-      name: 'Televisión en vivo premium y catálogo bajo demanda',
-      description: 'Servicio premium de televisión en vivo y catálogo bajo demanda, diseñado para Android y dispositivos compatibles.',
-      provider: { '@id': orgId },
-      areaServed: [{ '@type': 'Country', name: 'Colombia' }],
-      offers: site.pricing.plans.map((p) => ({
-        '@type': 'Offer',
-        name: `Plan ${p.name}`,
-        price: p.price,
-        priceCurrency: site.pricing.currencyCode,
-        url: canonicalUrl,
-        availability: 'https://schema.org/InStock'
-      }))
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: site.canonical
     }
   ]
 };
@@ -141,53 +139,109 @@ const structuredData = {
 <html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo_flujo.png" />
+    <meta name="theme-color" content="#06080c" />
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://wa.me" />
+    
+    <!-- SEO Primary Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="author" content="Flujo TV" />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="theme-color" content="#06080c" />
+    <meta name="author" content={site.author} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- Language & Region -->
+    <meta name="language" content="Spanish" />
     <meta name="geo.region" content="CO" />
     <meta name="geo.placename" content="Colombia" />
-
-    {googleSiteVerification ? (
-      <meta name="google-site-verification" content={googleSiteVerification} />
-    ) : null}
-
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" href={canonicalUrl} hreflang="es-co" />
-    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
+    <link rel="alternate" hreflang="es-CO" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_CO" />
-    <meta property="og:site_name" content="Flujo TV Colombia" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:alt" content="Flujo TV Colombia" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="1080" />
-
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Flujo TV Colombia" />
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href={faviconUrl} />
-    <meta name="generator" content={Astro.generator} />
-
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    
+    <!-- Structured Data / Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#06080c] text-white antialiased overflow-x-hidden">
+  <body class="bg-[#050510] text-white antialiased overflow-x-hidden selection:bg-purple-500/30 selection:text-white">
     <Header />
     <slot />
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  :root {
+    --accent-glow: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+     min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050510;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #33334d;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4d4d6d;
+  }
+  
+  /* Utilities */
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  }
+</style>

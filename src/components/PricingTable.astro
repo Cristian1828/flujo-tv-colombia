@@ -1,69 +1,183 @@
 ---
 import { site, waLink } from '../config/site';
 
-const plans = site.pricing.plans.map((p) => ({
-  ...p,
-  href: waLink(`Hola, quiero el plan ${p.name} (${site.pricing.currencyCode} ${p.price}) para Flujo TV Colombia.`),
-}));
+const baseMessage = 'Hola, quiero comprar Flujo TV. Me interesa el plan:';
+
+const PLANS_CONFIG = {
+  '1m': { 
+    color: 'text-gray-400', 
+    border: 'border-white/10', 
+    bg: 'bg-white/5', 
+    icon: '1', 
+    highlight: 'border-gray-400',
+    btnActive: 'bg-white text-black border-transparent'
+  },
+  '3m': { 
+    color: 'text-blue-400', 
+    border: 'border-blue-500', 
+    bg: 'bg-blue-900/10', 
+    icon: '3', 
+    highlight: 'border-blue-500 shadow-[0_0_40px_rgba(59,130,246,0.3)]',
+    btnActive: 'bg-blue-600 text-white border-blue-600'
+  },
+  '6m': { 
+    color: 'text-purple-400', 
+    border: 'border-white/10', 
+    bg: 'bg-purple-900/10', 
+    icon: '6', 
+    highlight: 'border-purple-500 shadow-[0_0_40px_rgba(168,85,247,0.3)]',
+    btnActive: 'bg-purple-600 text-white border-purple-600'
+  },
+  '12m': { 
+    color: 'text-amber-400', 
+    border: 'border-white/10', 
+    bg: 'bg-amber-900/10', 
+    icon: '12', 
+    highlight: 'border-amber-500 shadow-[0_0_40px_rgba(245,158,11,0.3)]',
+    btnActive: 'bg-amber-500 text-white border-amber-500' // Orange/Amber
+  },
+};
 ---
 
-<section id="planes" class="relative py-24 bg-gradient-to-b from-[#06080c] via-black to-[#06080c]">
-  <div class="mx-auto max-w-6xl px-4">
-    <div class="text-center">
-      <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
-        Precios en {site.pricing.currencyCode}
-      </p>
-      <h2 class="mt-5 text-4xl font-extrabold tracking-tight md:text-5xl">Planes para usarlo donde estés</h2>
-      <p class="mt-4 text-white/70">
-        Acceso premium con soporte garantizado. Elige el tiempo que más te convenga.
-      </p>
+<section id="planes" class="relative py-24 bg-[#050B14] overflow-hidden">
+  
+  <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03] bg-top"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <div class="flex flex-col items-start mb-16 overflow-visible">
+      <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 bg-blue-500/10 rounded-sm border-l-2 border-blue-500">
+         <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Suscripciones Oficiales</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase pb-2">
+        Elige Tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 pr-12 py-2 inline-block">Plan</span>
+      </h2>
     </div>
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-4">
-      {plans.map((p) => (
-        <div class={`rounded-3xl border ${p.highlight ? 'border-white/20 bg-white/10' : 'border-white/10 bg-white/5'} p-6 backdrop-blur`}>
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="text-xl font-bold">{p.name}</h3>
-              <p class="mt-1 text-sm text-white/70">{p.label}</p>
-            </div>
-            {p.highlight && (
-              <span class="rounded-full bg-red-600/15 text-red-200 border border-red-500/30 px-3 py-1 text-xs font-semibold">Recomendado</span>
-            )}
-          </div>
+    <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {site.pricing.plans.map((plan) => {
+        const href = waLink(`${baseMessage} ${plan.name}`);
+        const config = PLANS_CONFIG[plan.id as keyof typeof PLANS_CONFIG] || PLANS_CONFIG['1m'];
+        const isDefault = plan.id === '3m'; 
 
-          <div class="mt-6 flex items-end gap-2">
-            <span class="text-4xl font-extrabold">${p.price}</span>
-            <span class="pb-1 text-sm text-white/60">{site.pricing.currencyCode}</span>
-          </div>
-
-          <ul class="mt-6 space-y-3 text-sm text-white/80">
-            {p.features.map((f) => (
-              <li class="flex gap-3">
-                <span class="mt-1.5 h-2 w-2 rounded-full bg-emerald-300/90"></span>
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-
-          <a
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`mt-7 inline-flex w-full items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold transition ${
-              p.highlight
-                ? 'bg-red-600 text-white hover:bg-red-700'
-                : 'border border-white/15 bg-white/5 text-white/90 hover:bg-red-600 hover:border-red-500/40 hover:text-white'
-            }`}
+        return (
+          <div 
+            class="pricing-card group relative flex flex-col h-full bg-[#0A101C] rounded-xl border transition-all duration-300 overflow-hidden cursor-default"
+            data-plan={plan.id}
+            data-default={isDefault}
+            data-active-class={`${config.highlight} scale-[1.03] z-10`}
+            data-base-class="border-white/10 scale-100 opacity-90 hover:opacity-100"
+            data-btn-active={config.btnActive}
           >
-            Activar por WhatsApp
-          </a>
-        </div>
-      ))}
+            
+            <!-- Dynamic BG -->
+            <div class={`absolute inset-0 ${config.bg} opacity-0 transition-opacity duration-300 bg-layer`}></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-0 pointer-events-none"></div>
+
+            <div class="relative z-10 p-6 flex flex-col h-full">
+              
+              <div class="flex justify-between items-start mb-6">
+                <div class={`w-12 h-12 flex items-center justify-center rounded-xl bg-black/40 border border-white/5 font-black text-xl ${config.color} icon-box`}>
+                  {config.icon}
+                </div>
+                {plan.highlight && (
+                   <div class="px-2 py-1 bg-white/10 text-[9px] font-black uppercase tracking-wider text-white/90 rounded border border-white/10">
+                     Recomendado
+                   </div>
+                )}
+              </div>
+
+              <h3 class="text-2xl font-black text-white uppercase italic tracking-wide mb-1">{plan.name}</h3>
+              <p class="text-[10px] text-white/40 font-mono uppercase tracking-widest mb-6">{plan.label}</p>
+
+              <div class="mb-6 pb-6 border-b border-white/5">
+                <div class="flex items-baseline gap-1">
+                   <span class="text-4xl font-black tracking-tight text-white">{plan.price}</span>
+                   <span class="text-xs font-bold text-white/40">USD</span>
+                </div>
+              </div>
+
+              <ul class="space-y-3 mb-8 flex-1">
+                {plan.features.map(f => (
+                  <li class="flex items-start gap-3 text-sm font-medium text-white/60">
+                    <div class="w-1 h-1 bg-white/40 rounded-full mt-2 feature-dot"></div>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a 
+                href={href}
+                target="_blank"
+                class={`btn-action w-full py-4 flex items-center justify-center font-black uppercase text-xs tracking-[0.2em] border rounded-lg transition-all duration-300 bg-transparent border-white/20 text-white`}
+              >
+                Seleccionar
+              </a>
+
+            </div>
+          </div>
+        )
+      })}
     </div>
 
-    <div class="mt-10 text-center text-xs text-white/60">
-      Requiere internet estable. Smart TV sin Android requiere TV Box.
-    </div>
   </div>
 </section>
+
+<script>
+  const grid = document.getElementById('pricing-grid');
+  const cards = document.querySelectorAll('.pricing-card');
+
+  function setActive(card) {
+    // Reset all
+    cards.forEach(c => {
+      const baseClass = c.getAttribute('data-base-class');
+      c.className = `pricing-card group relative flex flex-col h-full bg-[#0A101C] rounded-xl border transition-all duration-300 overflow-hidden cursor-default ${baseClass}`;
+      
+      const bg = c.querySelector('.bg-layer');
+      if(bg) { bg.classList.remove('opacity-100'); bg.classList.add('opacity-0'); }
+      
+      const btn = c.querySelector('.btn-action');
+      if(btn) {
+         // Clear dynamic colors
+         btn.className = 'btn-action w-full py-4 flex items-center justify-center font-black uppercase text-xs tracking-[0.2em] border rounded-lg transition-all duration-300 bg-transparent border-white/20 text-white';
+      }
+    });
+
+    // Set Active
+    const activeClass = card.getAttribute('data-active-class');
+    const btnActiveInfo = card.getAttribute('data-btn-active');
+    
+    // Remove base classes that conflict
+    card.classList.remove('border-white/10', 'scale-100', 'opacity-90');
+    
+    // Add active classes
+    const classesToAdd = activeClass.split(' ');
+    card.classList.add(...classesToAdd);
+
+    // Show BG
+    const bg = card.querySelector('.bg-layer');
+    if(bg) { bg.classList.remove('opacity-0'); bg.classList.add('opacity-100'); }
+
+    // Set Custom Button Style
+    const btn = card.querySelector('.btn-action');
+    if(btn && btnActiveInfo) {
+       // Reset base and apply custom active
+       btn.className = `btn-action w-full py-4 flex items-center justify-center font-black uppercase text-xs tracking-[0.2em] border rounded-lg transition-all duration-300 ${btnActiveInfo}`;
+    }
+  }
+
+  // Initial State (3m default)
+  const defaultCard = document.querySelector('.pricing-card[data-default="true"]');
+  if (defaultCard) setActive(defaultCard);
+
+  // Hover Events
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      setActive(card);
+    });
+  });
+
+  // Reset to default on grid leave
+  grid.addEventListener('mouseleave', () => {
+    if (defaultCard) setActive(defaultCard);
+  });
+</script>
