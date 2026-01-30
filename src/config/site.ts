@@ -28,7 +28,7 @@ export const site = {
   ],
 
   // Contact (Peru Number as requested)
-  whatsappNumber: '51921445800',
+  whatsappNumber: '51914326729',
   supportEmail: 'soporte@flujooficial.com',
 
   // Download Configuration (Restored)

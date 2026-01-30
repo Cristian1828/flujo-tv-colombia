@@ -25,7 +25,7 @@ export const site = {
   canonical: 'https://co.flujooficial.com', // URL Final
   
   // Contacto (Centralizado)
-  whatsappNumber: '51921445800', 
+  whatsappNumber: '51914326729', 
   supportEmail: 'soporte@flujooficial.com',
   
   // Enlaces de Descarga
